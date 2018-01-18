@@ -209,7 +209,7 @@ function car1MoveIntersectionWest() {
 
 	if(car1Left <= 70) {
 		stopCars();
-		// startCar1North();
+		startCar1North();
 	}
 }
 
@@ -220,10 +220,45 @@ function startCar1West () {
 }
 
 
+//NORTH
+
+//Move car north
+
+function moveCar1North () {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+
+	if(car1Top <= 210) {
+		stopCars();
+	setTimeout(startCar1IntersectionNorth, 2000);
+	}
+	
+
+	console.log(car1.style.left + ' = left');
+	console.log(car1Left + ' = left');
+	console.log(car1Top + ' = top');
+
+	car1.style.top = `${parseInt(car1.style.top.replace("px", "")) - 10}px`;
+}
+
+//Move car north through intersection
+
+function car1MoveIntersectionNorth() {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+	car1.style.top = `${parseInt(car1.style.top.replace("px", "")) - 10}px`;
+
+	if(car1Top <= 90) {
+		stopCars();
+		startCar1();
+	}
+}
 
 
-
-
+function startCar1North () {
+	stopCars();
+	intervalId = setInterval(moveCar1North, 200);
+}
 
 
 // Intersection timeouts and calling next move
@@ -238,6 +273,10 @@ function startCar1IntersectionSouth () {
 
 function startCar1IntersectionWest () {
 	intervalId = setInterval(car1MoveIntersectionWest, 200)
+}
+
+function startCar1IntersectionNorth () {
+	intervalId = setInterval(car1MoveIntersectionNorth, 200)
 }
 
 
