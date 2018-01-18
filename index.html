@@ -27,7 +27,7 @@
     #car1 {
         /*margin: 20px;*/
         top: 80px;
-        left: 50px;
+        left: 60px;
         background-color: red;
         height: 20px;
         width: 20px;
@@ -38,7 +38,7 @@
     #car2 {
         /*margin: 20px;*/
         top: 120px;
-        left: 50px;
+        left: 6050px;
         background-color: green;
         height: 20px;
         width: 20px;
@@ -49,7 +49,7 @@
     #car3 {
         /*margin: 20px;*/
         top: 160px;
-        left: 50px;
+        left: 60px;
         background-color: purple;
         height: 20px;
         width: 20px;
@@ -88,13 +88,18 @@ resetCars();
 
 function resetCars() {
 	car1.style.top = "80px";
-	car1.style.left = "50px";
+	car1.style.left = "60px";
 	car2.style.top = "120px";
-	car2.style.left = "50px";
+	car2.style.left = "60px";
 	car3.style.top = "160px";
-	car3.style.left = "50px";
+	car3.style.left = "60px";
 	
 }
+
+
+//EAST
+
+//Move car East
 
 function moveCar1East() {
 	let car1Left = getComputedStyle(car1).left.replace('px', '');
@@ -102,7 +107,7 @@ function moveCar1East() {
 
 	if(car1Left >= 680) {
 		stopCars();
-	setTimeout(startCar1Intersection, 2000);
+	setTimeout(startCar1IntersectionEast, 2000);
 	}
 	
 
@@ -113,7 +118,9 @@ function moveCar1East() {
 	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) + 10}px`;
 }
 
-function carMoveIntersection() {
+//Move car East through intersection
+
+function car1MoveIntersectionEast() {
 	let car1Left = getComputedStyle(car1).left.replace('px', '');
 	let car1Top = getComputedStyle(car1).top.replace('px', '');
 	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) + 10}px`;
@@ -129,14 +136,20 @@ function startCar1South () {
 	intervalId = setInterval(moveCar1South, 200);
 }
 
+
+
+//SOUTH
+
+//Move car South
+
 function moveCar1South () {
 	let car1Left = getComputedStyle(car1).left.replace('px', '');
 	let car1Top = getComputedStyle(car1).top.replace('px', '');
 
-	// if(car1Left >= 680) {
-	// 	stopCars();
-	// setTimeout(startCar1Intersection, 2000);
-	// }
+	if(car1Top >= 690) {
+		stopCars();
+	setTimeout(startCar1IntersectionSouth, 2000);
+	}
 	
 
 	console.log(car1.style.left + ' = left');
@@ -147,15 +160,95 @@ function moveCar1South () {
 }
 
 
-function startCar1Intersection () {
-	intervalId = setInterval(carMoveIntersection, 200)
+//Move car south through intersection
+
+function car1MoveIntersectionSouth() {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+	car1.style.top = `${parseInt(car1.style.top.replace("px", "")) + 10}px`;
+
+	if(car1Top >= 810) {
+		startCar1West();
+	}
 }
 
+
+function startCar1West () {
+	stopCars();
+	intervalId = setInterval(moveCar1West, 200);
+}
+
+
+//WEST
+
+//Move car west
+
+function moveCar1West () {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+
+	if(car1Left <= 190) {
+		stopCars();
+	setTimeout(startCar1IntersectionWest, 2000);
+	}
+	
+
+	console.log(car1.style.left + ' = left');
+	console.log(car1Left + ' = left');
+	console.log(car1Top + ' = top');
+
+	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) - 10}px`;
+}
+
+//Move car west through intersection
+
+function car1MoveIntersectionWest() {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) - 10}px`;
+
+	if(car1Left <= 70) {
+		stopCars();
+		// startCar1North();
+	}
+}
+
+
+function startCar1West () {
+	stopCars();
+	intervalId = setInterval(moveCar1West, 200);
+}
+
+
+
+
+
+
+
+
+// Intersection timeouts and calling next move
+
+function startCar1IntersectionEast () {
+	intervalId = setInterval(car1MoveIntersectionEast, 200)
+}
+
+function startCar1IntersectionSouth () {
+	intervalId = setInterval(car1MoveIntersectionSouth, 200)
+}
+
+function startCar1IntersectionWest () {
+	intervalId = setInterval(car1MoveIntersectionWest, 200)
+}
+
+
+//Initial start of car
 
 function startCar1() {
 	intervalId = setInterval(moveCar1East, 200);
 }
 
+
+//Clearing interval of car
 
 function stopCars() {
 	clearInterval(intervalId);
