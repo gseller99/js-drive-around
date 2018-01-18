@@ -60,6 +60,11 @@
     .buttonsRedCar {
         margin: 5px;
     }
+
+    .carText {
+    	color: white;
+    	text-align: center;
+    }
     </style>
 </head>
 
@@ -68,11 +73,10 @@
 	<input class="buttonsRedCar" type="button" value="Stop Cars" onclick="stopCars()">
 	<input class="buttonsRedCar" type="button" value="Reset Cars" onclick="resetCars()">
 
-
     <div id="container"></div>
-    <div id="car1"></div>
-    <div id="car2"></div>
-    <div id="car3"></div>
+    <div class="carText" id="car1">1</div>
+    <div class="carText" id="car2">2</div>
+    <div class="carText" id="car3">3</div>
     
     <script>
 
@@ -80,47 +84,78 @@
 
     var IntervalId;
 
-console.log(car1);
+resetCars();
 
-reset();
-
-function reset() {
-	box1.style.left = "20px";
-	box1.style.top = "90px";
-	box2.style.left = "20px";
-	box2.style.top = "220px";
+function resetCars() {
+	car1.style.top = "80px";
+	car1.style.left = "50px";
+	car2.style.top = "120px";
+	car2.style.left = "50px";
+	car3.style.top = "160px";
+	car3.style.left = "50px";
+	
 }
 
-function moveBox1() {
-	box1.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+function moveCar1East() {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+
+	if(car1Left >= 680) {
+		stopCars();
+	setTimeout(startCar1Intersection, 2000);
+	}
+	
+
+	console.log(car1.style.left + ' = left');
+	console.log(car1Left + ' = left');
+	console.log(car1Top + ' = top');
+
+	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) + 10}px`;
 }
 
-function moveBox2() {
-	box2.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+function carMoveIntersection() {
+	let car1Left = getComputedStyle(car1).left.replace('px', '');
+	let car1Top = getComputedStyle(car1).top.replace('px', '');
+	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) + 10}px`;
+
+	if(car1Left >= 790) {
+		stopCars();
+	}
+}
+
+// function startCar1South () {
+// 	intervalId = setInterval(moveCar1South, 200);
+// }
+
+// function moveCar1South () {
+// 	let car1Left = getComputedStyle(car1).left.replace('px', '');
+// 	let car1Top = getComputedStyle(car1).top.replace('px', '');
+
+// 	if(car1Left >= 680) {
+// 		stopCars();
+// 	setTimeout(startCar1Intersection, 2000);
+// 	}
+	
+
+// 	console.log(car1.style.left + ' = left');
+// 	console.log(car1Left + ' = left');
+// 	console.log(car1Top + ' = top');
+
+// 	car1.style.left = `${parseInt(car1.style.left.replace("px", "")) + 10}px`;
+// }
+
+function startCar1Intersection () {
+	intervalId = setInterval(carMoveIntersection, 200)
 }
 
 
-function moveBoth() {
-	box1.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
-	box2.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+function startCar1() {
+	intervalId = setInterval(moveCar1East, 200);
 }
 
 
-function start1() {
-	intervalId1 = setInterval(moveBox1, 200);
-}
-
-function start2() {
-	intervalId1 = setInterval(moveBox2, 100);
-}
-
-function startBoth () {
-	intervalId1 = setInterval(moveBoth, 100);
-}
-
-
-function stop() {
-	clearInterval(intervalId1, intervalId2);
+function stopCars() {
+	clearInterval(intervalId);
 
 }
 
