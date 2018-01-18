@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>JS Drive Around</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="javascript" type="text/javascript" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <style type="text/css">
+    #container {
+        top: 60px;
+        left: 40px;
+        background-color: yellow;
+        height: 800px;
+        width: 800px;
+        position: absolute;
+        z-index: 1;
+        border-left: 140px solid black;
+        border-right: 140px solid black;
+        border-top: 140px solid black;
+        border-bottom: 140px solid black;
+    }
+
+    #car1 {
+        /*margin: 20px;*/
+        top: 80px;
+        left: 50px;
+        background-color: red;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        z-index: 50;
+    }
+
+    #car2 {
+        /*margin: 20px;*/
+        top: 120px;
+        left: 50px;
+        background-color: green;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        z-index: 51;
+    }
+
+    #car3 {
+        /*margin: 20px;*/
+        top: 160px;
+        left: 50px;
+        background-color: purple;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        z-index: 52;
+    }
+
+    .buttonsRedCar {
+        margin: 5px;
+    }
+    </style>
+</head>
+
+<body>
+    <input class="buttonsRedCar" type="button" value="Start Car 1" onclick="startCar1()">
+	<input class="buttonsRedCar" type="button" value="Stop Cars" onclick="stopCars()">
+	<input class="buttonsRedCar" type="button" value="Reset Cars" onclick="resetCars()">
+
+
+    <div id="container"></div>
+    <div id="car1"></div>
+    <div id="car2"></div>
+    <div id="car3"></div>
+    
+    <script>
+
+    let car1 = document.querySelector('#car1');
+
+    var IntervalId;
+
+console.log(car1);
+
+reset();
+
+function reset() {
+	box1.style.left = "20px";
+	box1.style.top = "90px";
+	box2.style.left = "20px";
+	box2.style.top = "220px";
+}
+
+function moveBox1() {
+	box1.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+}
+
+function moveBox2() {
+	box2.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+}
+
+
+function moveBoth() {
+	box1.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+	box2.style.left = `${parseInt(box1.style.left.replace("px", "")) + 10}px`;
+}
+
+
+function start1() {
+	intervalId1 = setInterval(moveBox1, 200);
+}
+
+function start2() {
+	intervalId1 = setInterval(moveBox2, 100);
+}
+
+function startBoth () {
+	intervalId1 = setInterval(moveBoth, 100);
+}
+
+
+function stop() {
+	clearInterval(intervalId1, intervalId2);
+
+}
+
+    </script>
+</body>
+
+</html>
