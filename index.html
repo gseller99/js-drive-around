@@ -39,7 +39,7 @@
         /*margin: 20px;*/
        /* top: 120px;
         left: 6050px;*/
-        background-color: green;
+        background-color: mediumblue;
         height: 20px;
         width: 20px;
         position: absolute;
@@ -97,10 +97,13 @@
     <script>
 
     let car1 = document.querySelector('#car1');
+   	let intersectionWait = 1000;
+   	let roadSpeed = 10;
+   	let intersectionSpeed = 200;
 
     var IntervalId;
 
-resetCars();
+
 
 function resetCars() {
 	car1.style.top = "80px";
@@ -113,6 +116,8 @@ function resetCars() {
 }
 
 
+resetCars();
+
 //EAST
 
 //Move car East
@@ -121,9 +126,9 @@ function moveCar1East() {
 	let car1Left = getComputedStyle(car1).left.replace('px', '');
 	let car1Top = getComputedStyle(car1).top.replace('px', '');
 
-	if(car1Left >= 680) {
+	if(car1Left >= 670) {
 		stopCars();
-	setTimeout(startCar1IntersectionEast, 2000);
+	setTimeout(startCar1IntersectionEast, intersectionWait);
 	}
 	
 
@@ -149,7 +154,7 @@ function car1MoveIntersectionEast() {
 
 function startCar1South () {
 	stopCars();
-	intervalId = setInterval(moveCar1South, 200);
+	intervalId = setInterval(moveCar1South, roadSpeed);
 }
 
 
@@ -164,7 +169,7 @@ function moveCar1South () {
 
 	if(car1Top >= 690) {
 		stopCars();
-	setTimeout(startCar1IntersectionSouth, 2000);
+	setTimeout(startCar1IntersectionSouth, intersectionWait);
 	}
 	
 
@@ -191,7 +196,7 @@ function car1MoveIntersectionSouth() {
 
 function startCar1West () {
 	stopCars();
-	intervalId = setInterval(moveCar1West, 200);
+	intervalId = setInterval(moveCar1West, roadSpeed);
 }
 
 
@@ -205,7 +210,7 @@ function moveCar1West () {
 
 	if(car1Left <= 190) {
 		stopCars();
-	setTimeout(startCar1IntersectionWest, 2000);
+	setTimeout(startCar1IntersectionWest, intersectionWait);
 	}
 	
 
@@ -232,7 +237,7 @@ function car1MoveIntersectionWest() {
 
 function startCar1West () {
 	stopCars();
-	intervalId = setInterval(moveCar1West, 200);
+	intervalId = setInterval(moveCar1West, roadSpeed);
 }
 
 
@@ -246,7 +251,7 @@ function moveCar1North () {
 
 	if(car1Top <= 210) {
 		stopCars();
-	setTimeout(startCar1IntersectionNorth, 2000);
+	setTimeout(startCar1IntersectionNorth, intersectionWait);
 	}
 	
 
@@ -273,33 +278,33 @@ function car1MoveIntersectionNorth() {
 
 function startCar1North () {
 	stopCars();
-	intervalId = setInterval(moveCar1North, 200);
+	intervalId = setInterval(moveCar1North, roadSpeed);
 }
 
 
 // Intersection timeouts and calling next move
 
 function startCar1IntersectionEast () {
-	intervalId = setInterval(car1MoveIntersectionEast, 200)
+	intervalId = setInterval(car1MoveIntersectionEast, intersectionSpeed)
 }
 
 function startCar1IntersectionSouth () {
-	intervalId = setInterval(car1MoveIntersectionSouth, 200)
+	intervalId = setInterval(car1MoveIntersectionSouth, intersectionSpeed)
 }
 
 function startCar1IntersectionWest () {
-	intervalId = setInterval(car1MoveIntersectionWest, 200)
+	intervalId = setInterval(car1MoveIntersectionWest, intersectionSpeed)
 }
 
 function startCar1IntersectionNorth () {
-	intervalId = setInterval(car1MoveIntersectionNorth, 200)
+	intervalId = setInterval(car1MoveIntersectionNorth, intersectionSpeed)
 }
 
 
 //Initial start of car
 
 function startCar1() {
-	intervalId = setInterval(moveCar1East, 200);
+	intervalId = setInterval(moveCar1East, roadSpeed);
 }
 
 
